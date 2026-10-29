@@ -1,0 +1,81 @@
+HASHING DEMO - synthetic data only
+
+======================================================================
+DEMO 1: A hash is a fixed-size fingerprint
+======================================================================
+
+Input: "abc"
+  md5    900150983cd24fb0d6963f7d28e17f72
+  sha1   a9993e364706816aba3e25717850c26c9cd0d89d
+  sha256 ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
+
+Input: "Hello, World!"
+  md5    65a8e27d8879283831b664bd8b7f0ad4
+  sha1   0a0a9f2a6772942557ab5355d76af442f8f65e01
+  sha256 dffd6021bb2bd5b0af676290809ec3a53191dd81c7f70a4b28688a362182986f
+
+Input: 1,000,000 letters 'a'
+  sha256 cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0
+-> Tiny or huge input, the sha256 output is always 64 hex characters.
+-> Same input always gives the same hash.
+
+======================================================================
+DEMO 2: Avalanche effect: change one character
+======================================================================
+A: "Transfer 100 rupees to Asha"
+B: "Transfer 900 rupees to Asha"
+  sha256(A) = 15bfd58465106d2d472bd96d3dfd583b338810607c385fafcd2c4c3628ac6431
+  sha256(B) = 00031b54719d4e45d24b2cd2992919db16d061715c865a47d9734e54be5888d3
+-> 114 of 256 bits changed (44.5%).
+-> One tiny edit completely changes the hash, so edits are easy to spot.
+
+======================================================================
+DEMO 3: Integrity check on a file (what hashing CAN do)
+======================================================================
+Original file hash : 96462f8b13354724fb4478dc272987ec06a02a3382450404b40320364448f60a
+Verify original    : MATCH
+Verify after edit  : MISMATCH  <- tampering detected
+
+======================================================================
+DEMO 4: Limit 1: a plain hash does NOT prove WHO made the file
+======================================================================
+An attacker edits the file AND publishes a new hash next to it.
+Attacker's new hash: fc05185b2ca38fb859837d36f2622622b20f7ba210cb1731ef714724c108b647
+Verify vs new hash : MATCH  <- looks valid, but it is forged!
+
+Fix: use a keyed hash (HMAC) with a secret key.
+Real HMAC tag      : 417cd2a3684f8cd2a45ca6dbcf06bd80a31010e12f4cad009efba9cb2a325494
+Tampered data      : REJECTED
+Forged tag, no key : REJECTED
+-> Without the secret key, the attacker cannot make a valid tag.
+
+======================================================================
+DEMO 5: Limit 2: fast unsalted hashes are weak for passwords
+======================================================================
+Stored with plain SHA-256 (no salt):
+  user_a: 284fff3bd254b48cca05a8bfc4fad69e05cad0d086513a034a66a118829e6fa4
+  user_b: 284fff3bd254b48cca05a8bfc4fad69e05cad0d086513a034a66a118829e6fa4
+  user_c: d14a7e54e323552a7e12814510686aabf39b8d9b50a7e8b4695968e0bf1c063c
+-> user_a and user_b have IDENTICAL hashes, so anyone can see they share a password.
+
+A tiny made-up table of common passwords, pre-hashed:
+  user_a: FOUND in table -> sunshine1
+  user_b: FOUND in table -> sunshine1
+  user_c: not in table
+-> Weak passwords are found by simple lookup. Strong ones are not.
+
+Better: random salt + slow PBKDF2 (600,000 iterations):
+  user_a: salt=5699a468...  hash=682591187250d98bc1ff03a41a3735df...
+  user_b: salt=16e8a271...  hash=1a99aedc6a242b6e267ee2d9fc165a59...
+-> Same password, different hashes. Right password verifies: True; wrong: False
+-> Two hashes took 0.23s - slow on purpose to make guessing expensive.
+
+======================================================================
+DEMO 6: Summary: what hashing can and cannot protect
+======================================================================
+CAN:    detect changes (integrity); store passwords safely (with salt + slow hash);
+        fingerprint files; with HMAC, prove a message came from a key holder.
+CANNOT: keep data secret or be 'decrypted' (a hash is one-way, it is not encryption);
+        prove who made a file (needs HMAC or a digital signature);
+        protect weak, guessable passwords; or keep old algorithms safe
+        (MD5 and SHA-1 have known collisions - use SHA-256 or better).

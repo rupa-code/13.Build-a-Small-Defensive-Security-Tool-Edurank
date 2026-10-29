@@ -1,0 +1,40 @@
+test_average_over_many_messages_is_near_50_percent (test_hashing_demo.TestAvalanche.test_average_over_many_messages_is_near_50_percent) ... ok
+test_bit_difference_identical_is_zero (test_hashing_demo.TestAvalanche.test_bit_difference_identical_is_zero) ... ok
+test_bit_difference_rejects_unequal_lengths (test_hashing_demo.TestAvalanche.test_bit_difference_rejects_unequal_lengths) ... ok
+test_one_character_change_flips_about_half_the_bits (test_hashing_demo.TestAvalanche.test_one_character_change_flips_about_half_the_bits) ... ok
+test_bad_algorithm_rejected_by_argparse (test_hashing_demo.TestCommandLineAndDemo.test_bad_algorithm_rejected_by_argparse) ... ok
+test_full_demo_runs_and_shows_key_points (test_hashing_demo.TestCommandLineAndDemo.test_full_demo_runs_and_shows_key_points) ... ok
+test_missing_file_exit_2 (test_hashing_demo.TestCommandLineAndDemo.test_missing_file_exit_2) ... ok
+test_other_algorithm (test_hashing_demo.TestCommandLineAndDemo.test_other_algorithm) ... ok
+test_text_hash (test_hashing_demo.TestCommandLineAndDemo.test_text_hash) ... ok
+test_verify_match_and_mismatch (test_hashing_demo.TestCommandLineAndDemo.test_verify_match_and_mismatch) ... ok
+test_verify_without_input_exit_2 (test_hashing_demo.TestCommandLineAndDemo.test_verify_without_input_exit_2) ... ok
+test_different_input_different_hash (test_hashing_demo.TestHashProperties.test_different_input_different_hash) ... ok
+test_file_chunking_matches_direct_hash (test_hashing_demo.TestHashProperties.test_file_chunking_matches_direct_hash) ... ok
+test_fixed_output_length (test_hashing_demo.TestHashProperties.test_fixed_output_length) ... ok
+test_missing_file (test_hashing_demo.TestHashProperties.test_missing_file) ... ok
+test_same_input_same_hash (test_hashing_demo.TestHashProperties.test_same_input_same_hash) ... ok
+test_known_rfc4231_vector (test_hashing_demo.TestHmac.test_known_rfc4231_vector) ... ok
+test_tampered_data_rejected (test_hashing_demo.TestHmac.test_tampered_data_rejected) ... ok
+test_valid_tag_verifies (test_hashing_demo.TestHmac.test_valid_tag_verifies) ... ok
+test_wrong_key_rejected (test_hashing_demo.TestHmac.test_wrong_key_rejected) ... ok
+test_limit_plain_hash_can_be_recomputed_by_attacker (test_hashing_demo.TestIntegrity.test_limit_plain_hash_can_be_recomputed_by_attacker)
+A plain hash does not prove who made the file. ... ok
+test_tampered_file_fails (test_hashing_demo.TestIntegrity.test_tampered_file_fails) ... ok
+test_untouched_file_verifies (test_hashing_demo.TestIntegrity.test_untouched_file_verifies) ... ok
+test_uppercase_or_spaced_expected_hash_still_works (test_hashing_demo.TestIntegrity.test_uppercase_or_spaced_expected_hash_still_works) ... ok
+test_abc (test_hashing_demo.TestKnownVectors.test_abc) ... ok
+test_empty_input (test_hashing_demo.TestKnownVectors.test_empty_input) ... ok
+test_matches_system_sha256sum (test_hashing_demo.TestKnownVectors.test_matches_system_sha256sum) ... ok
+test_unsupported_algorithm (test_hashing_demo.TestKnownVectors.test_unsupported_algorithm) ... ok
+test_given_salt_is_deterministic (test_hashing_demo.TestPasswords.test_given_salt_is_deterministic) ... ok
+test_more_iterations_changes_hash (test_hashing_demo.TestPasswords.test_more_iterations_changes_hash) ... ok
+test_salt_is_16_bytes (test_hashing_demo.TestPasswords.test_salt_is_16_bytes) ... ok
+test_salted_same_password_different_hash (test_hashing_demo.TestPasswords.test_salted_same_password_different_hash) ... ok
+test_unsalted_same_password_same_hash (test_hashing_demo.TestPasswords.test_unsalted_same_password_same_hash) ... ok
+test_verify_password (test_hashing_demo.TestPasswords.test_verify_password) ... ok
+
+----------------------------------------------------------------------
+Ran 34 tests in 0.026s
+
+OK
